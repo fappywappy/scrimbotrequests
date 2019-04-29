@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dateformat": "^3.0.3",
     "discord.js": "^11.4.2",
     "dotenv": "^7.0.0",
     "mongoose": "^5.5.4",
