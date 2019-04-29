@@ -55,7 +55,7 @@ module.exports = async function (bot, args, msg) {
   
   const requestMsg = await requestsChannel.send(embed);
   successMsg(msg, `Request to join Slot ${slotNum} (Team ${team.name}) [successfully made](${requestMsg.url}).`);
-  logEvent(bot, `<@${author}> made a request to join Slot ${slotNum} (Team ${team.name}).`);
+  logEvent(bot, `${author} made a request to join Slot ${slotNum} (Team ${team.name}).`);
 
   bot.resources.requests[user_id] = {
     created_at: new Date(),
