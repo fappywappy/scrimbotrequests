@@ -25,6 +25,17 @@ class Bot {
     this.client = new Discord.Client();
     this.config = config;
     this.saveResources = saveResources;
+    this.updateTeams = updateTeams;
+    this.isLocked = false;
+    this.inScrim = false;
+    this.game1positions = false;
+    this.game2positions = false;
+    this.game3positions = false;
+    this.game1kills = false;
+    this.game2kills = false;
+    this.game3kills = false;
+    this.resultsRecorded = false;
+    //
   }
 
   async init() {

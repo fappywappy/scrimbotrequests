@@ -9,6 +9,10 @@ const saveResources = require('../database/saveResources');
 module.exports = async function (bot, args, msg) {
   const { INTEAM_ROLE, COMMAND_PREFIX } = bot.config;
 
+  if (bot.isLocked) {
+    return errorMsg(msg, 'Joining teams is locked.');
+  } 
+
   if (!args.length) {
     return errorMsg(msg, 'Please provide an slot number to join.');
   };

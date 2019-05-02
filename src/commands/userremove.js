@@ -52,6 +52,6 @@ module.exports = async function (bot, args, msg) {
     member.removeRole(INTEAM_ROLE)
   } catch (e) {};
 
-  successMsg(msg, `${rawUser} has successfully been removed from all [teams]${bot.team_panel_1.url}.`);
+  successMsg(msg, `${rawUser} has successfully been removed from all [teams](${bot.team_panel_1.url}).`);
   logEvent(bot, `${rawUser} has been removed from all teams.`);
 }

@@ -33,7 +33,7 @@ module.exports = function (bot, args, msg) {
   ~  **\\${prefix}editteam (1-30), (new team name)**- edit the name of a team corresponding with the slot number.
   ~  **\\${prefix}moveteam (1-30), (1-30)**- moves a team from one slot number to another.
 
-  Bot programmed by: https://www.fiverr.com/premiatech
+  Server Invite Link: https://discord.gg/2t8bgTw
   `);
 
   user.send(helpStr);

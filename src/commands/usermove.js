@@ -25,7 +25,6 @@ module.exports = async function (bot, args, msg) {
   const user_id = matchID[0];
 
   const { teams } = bot.resources;
-  let found = false;
   let slotFound;
 
   for (let i = 0; i < teams.length; i++) {
@@ -33,7 +32,6 @@ module.exports = async function (bot, args, msg) {
 
     bot.resources.teams[i].players = players.filter((player) => {
       if (player === user_id) {
-        found = true;
         slotFound = i+1;
         return false;
       };
@@ -42,15 +40,12 @@ module.exports = async function (bot, args, msg) {
 
   const newSlot = args[1];
 
-  if (!found) {
-    return errorMsg(msg, `${rawUser} not found in a [team](${bot.team_panel_1.url}).`);
-  }
-
   if (isNaN(newSlot) || newSlot <= 0 || newSlot >= 31) {
     return errorMsg(msg, `${newSlot} is not a valid number between 1 and 30.`);
   };
 
   bot.resources.teams[newSlot-1].players.push(user_id);
+  member.addRole(bot.config.INTEAM_ROLE);
 
   const url = newSlot <= 15 ? bot.team_panel_1.url : bot.team_panel_2.url;
 

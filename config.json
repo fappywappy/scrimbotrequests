@@ -1,14 +1,20 @@
 {
-  "GUILD": "561964284691742732",
-  "TEAM_CHANNEL": "572350647723360256",
-  "REQUESTS_CHANNEL": "572350630228918272",
-  "LOG_CHANNEL": "572350655948259346",
+  "GUILD": "560966211039657984",
+  "TEAM_CHANNEL": "573287464949776395",
+  "REQUESTS_CHANNEL": "573287528103411713",
+  "LOG_CHANNEL": "573287538488246333",
   "COMMAND_PREFIX": "!",
-  "INTEAM_ROLE": "572350732087459841",
+  "INTEAM_ROLE": "572117066337746945",
   "ALLOWED_ROLES": [
-    "572350713351372831"
+    "562225004104777748"
   ],
   "ICONS": {
-    "INFO": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Info_icon_002.svg/480px-Info_icon_002.svg.png"
-  }
+    "INFO": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Info_icon_002.svg/480px-Info_icon_002.svg.png",
+    "LOCKED": "https://image.flaticon.com/icons/png/128/149/149077.png",
+    "UNLOCKED": "https://image.flaticon.com/icons/png/128/149/149078.png"
+  },
+  "PLACES": [
+    0, 225, 175, 150, 130, 110, 95, 80, 60, 50, 40, 30, 20, 15, 10, 10
+  ],
+  "KILL_POINTS": 15
 }
