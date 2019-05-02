@@ -6,6 +6,7 @@ const clearRequests = require('../utils/clearRequests.js');
 
 module.exports = async function (bot, args, msg) {
   const { INTEAM_ROLE, COMMAND_PREFIX, TEAM_CHANNEL } = bot.config;
+  msg.delete(500);
 
   if (bot.inScrim) {
     return errorMsg(msg, `There is a scrim active already. ${COMMAND_PREFIX}scrimend or ${COMMAND_PREFIX}scrimreset to end the scrim.`);
@@ -27,7 +28,6 @@ module.exports = async function (bot, args, msg) {
   
   msg.channel.send(embed);
   msg.channel.send(`<@&${INTEAM_ROLE}>`).then(m => m.delete(1000));
-  msg.delete(500);
 
   let { teams } = bot.resources;
   let sortedTeams = [];

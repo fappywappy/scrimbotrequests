@@ -27,7 +27,7 @@ module.exports = async function (bot, args, msg) {
   const hasRole = roles.some(role => role.id === INTEAM_ROLE);
 
   if (hasRole) {
-    return errorMsg(msg, `You have a role that indicates that you are already in a team.\n${COMMAND_PREFIX}leave to leave your team.`);
+    return errorMsg(msg, `You have a role that indicates that you are already in a team.\n${COMMAND_PREFIX}teamleave to leave your team.`);
   }
   
   const { requestsChannel } = bot;

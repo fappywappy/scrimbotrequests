@@ -7,22 +7,22 @@ const orderByPoints = require('../utils/orderByPoints.js');
 
 module.exports = async function (bot, args, msg) {
   const { INTEAM_ROLE, COMMAND_PREFIX, TEAM_CHANNEL } = bot.config;
+  msg.delete(500);
 
   if (!bot.inScrim) {
-    return errorMsg(msg, `There must be a scrim active to use this command. ${COMMAND_PREFIX}scrimend or ${COMMAND_PREFIX}scrimreset to end the scrim.`);
+    return errorMsg(msg, `There must be a scrim active to use this command.`);
   };
 
   if (!args.length) {
     return errorMsg(msg, 'Please provide the scrim name.');
   };
 
-  const override = args[1];
-  console.log(override);
-  if (!bot.resultsRecorded || !override) {
+  const override = args[0] === 'true';
+  if (!bot.resultsRecorded && !override) {
     return errorMsg(msg, `Placement and kill results for all three games must be recorded.`);
   }
 
-  const scrimName = args[0];
+  const scrimName = args[1];
 
   orderByPoints(bot);
   const winningTeams = bot.resources.teams.slice(0, 5).filter(teams => teams.points !== 0);
@@ -33,7 +33,7 @@ module.exports = async function (bot, args, msg) {
 
   let congratsStr;
 
-  if (slots.length === 1) {
+  if (winningTeams.length === 1) {
     congratsStr = `Congratulations to the ${winningTeams.length} winning team!`;
   } else {
     congratsStr = `Congratulations to the ${winningTeams.length} winning teams!`;
@@ -50,15 +50,15 @@ module.exports = async function (bot, args, msg) {
     if (team.points) {
       embed.addField(`◄  Rank #${i + 1} | ${team.name}  ►`, stripIndent(`
       __**Statistics**__
-      Game 1: #${team.name}
-      Game 2: #${team.game1position}
-      Game 3: #${team.game2position}
+      Game 1: #${team.game1position}
+      Game 2: #${team.game2position}
+      Game 3: #${team.game3position}
       Kills: ${team.game1kills + team.game2kills + team.game3kills}
-      Points: ${team.game2kills}
+      Points: ${team.points}
 
       __**Players**__
       ${team.players.reduce((str, p, idx) => {
-        return str + `<@${p}>${idx < players.length - 1 ? '\n' : ''}`
+        return str + `<@${p}>${idx < team.players.length - 1 ? '\n' : ''}`
       }, '') || 'None'}
     `));
     }
@@ -66,9 +66,8 @@ module.exports = async function (bot, args, msg) {
 
   msg.channel.send(embed);
   msg.channel.send(`<@&${INTEAM_ROLE}>`).then(m => m.delete(1000));
-  msg.delete(500);
 
-  //everyother team cleared out
+  // Every other team cleared out.
 
   bot.resources.teams = bot.resources.teams.map((team) => {
     return {
@@ -96,7 +95,6 @@ module.exports = async function (bot, args, msg) {
 
   // Clear all but top five.
   const { teams } = bot.resources;
-  const { INTEAM_ROLE } = bot.config;
 
   const toRemoveUsers = [];
   for (let i = 5; i < teams.length; i++) {

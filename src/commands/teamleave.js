@@ -26,7 +26,8 @@ module.exports = async function (bot, args, msg) {
 
   try {
     const member = await bot.guild.fetchMember(user_id);
-    member.removeRole(INTEAM_ROLE)
+    await member.removeRole(INTEAM_ROLE)
+    return errorMsg(msg, `Removed the identifying role even though you were not in a team.`);
   } catch (e) {};
 
   if (!found) {

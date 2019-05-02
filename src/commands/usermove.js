@@ -34,8 +34,12 @@ module.exports = async function (bot, args, msg) {
       if (player === user_id) {
         slotFound = i+1;
         return false;
-      };
+      } else {
+        return true;
+      }
     })
+
+    if (slotFound) break;
   }
 
   const newSlot = args[1];
@@ -45,6 +49,7 @@ module.exports = async function (bot, args, msg) {
   };
 
   bot.resources.teams[newSlot-1].players.push(user_id);
+  const member = await bot.guild.fetchMember(user_id);
   member.addRole(bot.config.INTEAM_ROLE);
 
   const url = newSlot <= 15 ? bot.team_panel_1.url : bot.team_panel_2.url;
