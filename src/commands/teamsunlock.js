@@ -12,7 +12,7 @@ module.exports = async function (bot, args, msg) {
     return errorMsg(msg, `Scrims is already unlocked.`);
   };
 
-  bot.isLocked = true;
+  bot.isLocked = false;
   bot.updateTeams(bot);
   successMsg(msg, `Scrims is now unlocked.`);
 }

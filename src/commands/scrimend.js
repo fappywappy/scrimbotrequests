@@ -31,12 +31,24 @@ module.exports = async function (bot, args, msg) {
     return errorMsg(msg, `No teams have any points.`);
   }
 
-  let congratsStr;
+  let congratsStr = `**Congratulations to ${winningTeams[0].name} for winning ${scrimName}!**\n\n`;
 
   if (winningTeams.length === 1) {
-    congratsStr = `Congratulations to the ${winningTeams.length} winning team!`;
+    congratsStr += `${winningTeams[0].name} has secured a spot in the next scrim.`
+  } else if (winningTeams.length > 1 && winningTeams.length < 5) {
+    congratsStr += `These ${winningTeams.length} teams have secured a spot in the next scrim:\n`
+
+    for (let i = 0; i < winningTeams.length; i++) {
+      congratsStr += `• Team ${winningTeams[i].name}`
+      if (i !== winningTeams.length - 1) congratsStr += '\n'
+    }
   } else {
-    congratsStr = `Congratulations to the ${winningTeams.length} winning teams!`;
+    congratsStr += `These ${winningTeams.length} teams have secured a spot in the next scrim:\n`
+
+    for (let i = 0; i < 5; i++) {
+      congratsStr += `• Team ${winningTeams[i].name}`
+      if (i !== winningTeams.length - 1) congratsStr += '\n'
+    }
   }
 
   const embed = new RichEmbed();
@@ -44,30 +56,32 @@ module.exports = async function (bot, args, msg) {
   embed.setAuthor(`${scrimName} has ended!`, 'https://cdn3.iconfinder.com/data/icons/award-gray-set-1/100/award-13-512.png')
   embed.setDescription(congratsStr);
 
+  const {teams} = bot.resources;
+
   for (let i = 0; i < 15; i++) {
     const team = bot.resources.teams[i];
+    const { players } = bot.resources.teams[i];
+
+    let emptyPlayersStr = '';
+    for (let j = 0; j < 4 - players.length; j++) {
+      emptyPlayersStr += '-';
+
+      if (j < 4 - players.length - 1) emptyPlayersStr += '\n';
+    }
 
     if (team.points) {
-      embed.addField(`◄  Rank #${i + 1} | ${team.name}  ►`, stripIndent(`
-      __**Statistics**__
-      Game 1: #${team.game1position}
-      Game 2: #${team.game2position}
-      Game 3: #${team.game3position}
-      Kills: ${team.game1kills + team.game2kills + team.game3kills}
-      Points: ${team.points}
-
-      __**Players**__
-      ${team.players.reduce((str, p, idx) => {
-        return str + `<@${p}>${idx < team.players.length - 1 ? '\n' : ''}`
-      }, '') || 'None'}
-    `));
+      const title = (i === 0) ? `◄  WINNERS | ${team.name}  ►` : `◄  Rank #${i + 1} | ${team.name}  ►`
+      embed.addField(title, `**__Statistics__**\nGame 1: #${teams[i].game1position}\nGame 2: #${teams[i].game2position}\nGame 3: #${teams[i].game3position}\nKills: ${teams[i].game1kills + teams[i].game2kills + teams[i].game3kills}\nPoints: ${teams[i].points}\n\n**__Players__**\n` + 
+      (players.reduce((str, p, idx) => {
+        return str + `- <@${p}>${idx < players.length - 1 ? '\n' : (players.length === 4) ? '' : '\n'}`
+      }, '')) + emptyPlayersStr + '\n--------------------------------', true);
     }
   }
 
   msg.channel.send(embed);
   msg.channel.send(`<@&${INTEAM_ROLE}>`).then(m => m.delete(1000));
 
-  // Every other team cleared out.
+  // Every team statistics cleared out.
 
   bot.resources.teams = bot.resources.teams.map((team) => {
     return {
@@ -94,8 +108,6 @@ module.exports = async function (bot, args, msg) {
   bot.resultsRecorded = false;
 
   // Clear all but top five.
-  const { teams } = bot.resources;
-
   const toRemoveUsers = [];
   for (let i = 5; i < teams.length; i++) {
     let team = teams[i];

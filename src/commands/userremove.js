@@ -30,14 +30,15 @@ module.exports = async function (bot, args, msg) {
   for (let i = 0; i < teams.length; i++) {
     let { players } = teams[i];
 
-    if (found) break;
-
-    bot.resources.teams[i].players = players.filter((player) => {
-      if (player === user_id) {
-        found = true;
-        return false;
-      };
-    })
+    const inTeam = bot.resources.teams[i].players.some(playerID => playerID === user_id)
+    if (inTeam) {
+      bot.resources.teams[i].players = players.filter((player) => {
+        if (player === user_id) {
+          found = true;
+          return false;
+        };
+      })
+    }
   }
 
   if (!found) {

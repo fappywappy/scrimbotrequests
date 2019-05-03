@@ -16,20 +16,21 @@ module.exports = async function (bot, args, msg) {
   for (let i = 0; i < teams.length; i++) {
     let { players } = teams[i];
 
-    if (found) break;
-
-    bot.resources.teams[i].players = players.filter((player) => {
-      if (player === user_id) {
-        found = true;
-        return false;
-      };
-    })
+    const inTeam = bot.resources.teams[i].players.some(playerID => playerID === user_id)
+    if (inTeam) {
+      bot.resources.teams[i].players = players.filter((player) => {
+        if (player === user_id) {
+          found = true;
+          return false;
+        };
+      })
+    }
   }
 
   try {
     const member = await bot.guild.fetchMember(user_id);
     await member.removeRole(INTEAM_ROLE)
-  } catch (e) {};
+  } catch (e) { };
 
   if (!found) {
     return errorMsg(msg, `Removed the identifying role even though you were not in a team.`);

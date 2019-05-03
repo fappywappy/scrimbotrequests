@@ -30,16 +30,17 @@ module.exports = async function (bot, args, msg) {
   for (let i = 0; i < teams.length; i++) {
     let { players } = teams[i];
 
-    bot.resources.teams[i].players = players.filter((player) => {
-      if (player === user_id) {
-        slotFound = i+1;
-        return false;
-      } else {
-        return true;
-      }
-    })
-
-    if (slotFound) break;
+    const inTeam = bot.resources.teams[i].players.some(playerID => playerID === user_id)
+    if (inTeam) {
+      bot.resources.teams[i].players = players.filter((player) => {
+        if (player === user_id) {
+          slotFound = i + 1;
+          return false;
+        } else {
+          return true;
+        }
+      })
+    }
   }
 
   const newSlot = args[1];
@@ -48,7 +49,7 @@ module.exports = async function (bot, args, msg) {
     return errorMsg(msg, `${newSlot} is not a valid number between 1 and 30.`);
   };
 
-  bot.resources.teams[newSlot-1].players.push(user_id);
+  bot.resources.teams[newSlot - 1].players.push(user_id);
   const member = await bot.guild.fetchMember(user_id);
   member.addRole(bot.config.INTEAM_ROLE);
 

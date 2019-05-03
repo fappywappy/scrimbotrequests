@@ -16,7 +16,7 @@ module.exports = async function (bot, args, msg) {
   embed.setColor(0x36393E);
   embed.setAuthor(`Signups for ${scrimName} has begun!`, 'https://www.shareicon.net/data/256x256/2016/06/28/624000_trophy_256x256.png')
   embed.setDescription(stripIndent(`
-    Request to be part of a team by typing \`${COMMAND_PREFIX}join (1-30)\`.
+    Request to be part of a team by typing \`${COMMAND_PREFIX}teamjoin (1-30)\`.
     View teams in <#${TEAM_CHANNEL}>.
   `));
   

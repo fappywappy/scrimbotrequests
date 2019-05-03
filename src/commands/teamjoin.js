@@ -37,7 +37,7 @@ module.exports = async function (bot, args, msg) {
   if (requests.hasOwnProperty(user_id)) {
     try {
       const requestMsg = await requestsChannel.fetchMessage(requests[user_id].message_id);
-      return errorMsg(msg, `You already have an [active request](${requestMsg.url}).\nUse ${COMMAND_PREFIX}cancelrequest to cancel the existing request.`);
+      return errorMsg(msg, `You already have an [active request](${requestMsg.url}).\nUse ${COMMAND_PREFIX}requestcancel to cancel the existing request.`);
     } catch (e) {
       return errorMsg(msg, `You already have an active request.\nUse ${COMMAND_PREFIX}cancelrequest to cancel the existing request.`);
     }

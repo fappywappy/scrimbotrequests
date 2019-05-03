@@ -39,12 +39,19 @@ module.exports = async function (bot) {
   for (let i = 0; i < 15; i++) {
     const { players } = teams[i];
 
+    let emptyPlayersStr = '';
+    for (let j = 0; j < 4 - players.length; j++) {
+      emptyPlayersStr += '-';
+
+      if (j < 4 - players.length - 1) emptyPlayersStr += '\n';
+    }
+
     embed.fields[i] = {
       name: `◄  ${teams[i].name} | ${i + 1} ►`,
       value: `**__Statistics__**\nGame 1: #${teams[i].game1position}\nGame 2: #${teams[i].game2position}\nGame 3: #${teams[i].game3position}\nKills: ${teams[i].game1kills + teams[i].game2kills + teams[i].game3kills}\nPoints: ${teams[i].points}\n\n**__Players__**\n` + 
       (players.reduce((str, p, idx) => {
-        return str + `<@${p}>${idx < players.length - 1 ? '\n' : ''}`
-      }, '') || 'None'),
+        return str + `- <@${p}>${idx < players.length - 1 ? '\n' : (players.length === 4) ? '' : '\n'}`
+      }, '')) + emptyPlayersStr + '\n--------------------------------',
       inline: true,
     }
   }
@@ -56,12 +63,19 @@ module.exports = async function (bot) {
   for (let i = 0; i < 15; i++) {
     const { players } = teams[i+15];
 
+    let emptyPlayersStr = '';
+    for (let j = 0; j < 4 - players.length; j++) {
+      emptyPlayersStr += '-';
+
+      if (j < 4 - players.length - 1) emptyPlayersStr += '\n';
+    }
+
     embed.fields[i] = {
       name: `◄  ${teams[i+15].name} | ${i + 16} ►`,
       value: `**__Statistics__**\nGame 1: #${teams[i+15].game1position}\nGame 2: #${teams[i+15].game2position}\nGame 3: #${teams[i+15].game3position}\nKills: ${teams[i+15].game1kills + teams[i+15].game2kills + teams[i+15].game3kills}\nPoints: ${teams[i+15].points}\n\n**__Players__**\n` + 
       (players.reduce((str, p, idx) => {
-        return str + `<@${p}>${idx < players.length - 1 ? '\n' : ''}`
-      }, '') || 'None'),
+        return str + `- <@${p}>${idx < players.length - 1 ? '\n' : (players.length === 4) ? '' : '\n'}`
+      }, '')) + emptyPlayersStr + '\n--------------------------------',
       inline: true,
     }
   }

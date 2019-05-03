@@ -4,7 +4,7 @@ module.exports = function (bot, msg) {
 
   const matchPrefix = content.startsWith(COMMAND_PREFIX);
 
-  const rawCommand = content.substring(0, content.indexOf(' '));
+  const rawCommand = content.split(' ')[0];
   const matchReaction = /^(\<:).*\>$/.test(rawCommand);
 
   return matchPrefix || matchReaction;

@@ -9,8 +9,10 @@ module.exports = function (bot, args, cmdMsg) {
   const helpStr = stripIndent(`
   :sparkles: **Greetings!** :sparkles:
 
-  The prefix to use my commands in server is \`${prefix}\`  
+  The prefix to use my commands in server is \`${prefix}\`
+  You can also use custom server emojis as commands.
   Example:  \`${prefix}serverinfo \`
+  Example: \`:serverinfo:\`
 
   (argument) = Mandatory argument.
   [argument] = Optional argument.
@@ -26,7 +28,7 @@ module.exports = function (bot, args, cmdMsg) {
   ~  **\\${prefix}game1positions (1st place slot) [2nd place slot]...**- records positions for game 1.
   ~  **\\${prefix}game2kills (slot 1 kills) [slot 2 kills]...**- records kills for game 2. 
   ~  **\\${prefix}game2positions (1st place slot) [2nd place slot]...**- records positions for game 2.
-  ~  **\\${prefix}game2kills (slot 1 kills) [slot 2 kills]...**- records kills for game 3. 
+  ~  **\\${prefix}game3kills (slot 1 kills) [slot 2 kills]...**- records kills for game 3. 
   ~  **\\${prefix}game3positions (1st place slot) [2nd place slot]...**- records positions for game 3.
   ~  **\\${prefix}requestsclear**- clears existing requests.
   ~  **\\${prefix}scrimend (override), (scrim name)**- set override to 'true' to override record requirement.
