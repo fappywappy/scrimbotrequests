@@ -1,8 +1,8 @@
-const errorMsg = require('../utils/errorMsg.js');
-const successMsg = require('../utils/successMsg.js');
-const logEvent = require('../utils/logEvent');
+const errorMsg = require('../../utils/errorMsg.js');
+const successMsg = require('../../utils/successMsg.js');
+const logEvent = require('../../utils/logEvent');
 
-const saveResources = require('../database/saveResources');
+const saveResources = require('../../database/saveResources');
 
 module.exports = async function (bot, args, msg) {
   const { requests } = bot.resources;

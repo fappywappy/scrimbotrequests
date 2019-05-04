@@ -1,10 +1,10 @@
-const hasPermission = require('../utils/hasPermission');
-const errorMsg = require('../utils/errorMsg.js');
-const successMsg = require('../utils/successMsg.js');
-const logEvent = require('../utils/logEvent');
+const hasPermission = require('../../utils/hasPermission');
+const errorMsg = require('../../utils/errorMsg.js');
+const successMsg = require('../../utils/successMsg.js');
+const logEvent = require('../../utils/logEvent');
 
-const saveResources = require('../database/saveResources');
-const updateTeams = require('../functions/updateTeams');
+const saveResources = require('../../database/saveResources');
+const updateTeams = require('../../functions/updateTeams');
 
 function arraymove(arr, fromIndex, toIndex) {
   const element = arr[fromIndex];

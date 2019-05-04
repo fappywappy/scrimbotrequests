@@ -1,8 +1,8 @@
 const { RichEmbed } = require('discord.js');
 const stripIndent = require('strip-indent');
 
-const errorMsg = require('../utils/errorMsg.js');
-const clearRequests = require('../utils/clearRequests.js');
+const errorMsg = require('../../utils/errorMsg.js');
+const clearRequests = require('../../utils/clearRequests.js');
 
 module.exports = async function (bot, args, msg) {
   const { INTEAM_ROLE, COMMAND_PREFIX, TEAM_CHANNEL } = bot.config;

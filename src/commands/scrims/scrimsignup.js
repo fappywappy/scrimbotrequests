@@ -1,7 +1,7 @@
 const { RichEmbed } = require('discord.js');
 const stripIndent = require('strip-indent');
 
-const errorMsg = require('../utils/errorMsg.js');
+const errorMsg = require('../../utils/errorMsg.js');
 
 module.exports = async function (bot, args, msg) {
   const { INTEAM_ROLE, COMMAND_PREFIX, TEAM_CHANNEL } = bot.config;

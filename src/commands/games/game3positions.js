@@ -1,11 +1,11 @@
-const hasPermission = require('../utils/hasPermission');
-const errorMsg = require('../utils/errorMsg.js');
-const successMsg = require('../utils/successMsg.js');
-const logEvent = require('../utils/logEvent');
-const calculatePoints = require('../utils/calculatePoints');
+const hasPermission = require('../../utils/hasPermission');
+const errorMsg = require('../../utils/errorMsg.js');
+const successMsg = require('../../utils/successMsg.js');
+const logEvent = require('../../utils/logEvent');
+const calculatePoints = require('../../utils/calculatePoints');
 
-const saveResources = require('../database/saveResources');
-const updateTeams = require('../functions/updateTeams');
+const saveResources = require('../../database/saveResources');
+const updateTeams = require('../../functions/updateTeams');
 
 module.exports = async function (bot, args, msg) {
   if (!hasPermission(bot, msg)) {
@@ -38,19 +38,19 @@ module.exports = async function (bot, args, msg) {
     givenSlots.push(slot);
 
     if (i > bot.config.PLACES.length - 2) {
-      bot.resources.teams[slot].game2position = 0;
+      bot.resources.teams[slot].game3position = 0;
     } else {
-      bot.resources.teams[slot].game2position = i + 1;
+      bot.resources.teams[slot].game3position = i + 1;
     }
   }
 
   for (let i = 0; i < 30; i++) {
     if (givenSlots.some((num) => num === i)) continue;
-    bot.resources.teams[i].game2position = 0;
+    bot.resources.teams[i].game3position = 0;
   }
 
-  bot.game2positions = true;
+  bot.game3positions = true;
   calculatePoints(bot);
-  successMsg(msg, 'Game 2 positions recorded.');
+  successMsg(msg, 'Game 3 positions recorded.');
   bot.updateTeams(bot);
 }

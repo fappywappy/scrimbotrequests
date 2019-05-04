@@ -1,11 +1,11 @@
-const hasPermission = require('../utils/hasPermission');
-const errorMsg = require('../utils/errorMsg.js');
-const successMsg = require('../utils/successMsg.js');
-const logEvent = require('../utils/logEvent');
-const calculatePoints = require('../utils/calculatePoints');
+const hasPermission = require('../../utils/hasPermission');
+const errorMsg = require('../../utils/errorMsg.js');
+const successMsg = require('../../utils/successMsg.js');
+const logEvent = require('../../utils/logEvent');
+const calculatePoints = require('../../utils/calculatePoints');
 
-const saveResources = require('../database/saveResources');
-const updateTeams = require('../functions/updateTeams');
+const saveResources = require('../../database/saveResources');
+const updateTeams = require('../../functions/updateTeams');
 
 module.exports = async function (bot, args, msg) {
   if (!hasPermission(bot, msg)) {

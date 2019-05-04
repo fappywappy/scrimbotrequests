@@ -18,6 +18,9 @@ const saveResources = require('./database/saveResources');
 // Utility functions.
 const isCommand = require('./utils/isCommand');
 const parseCommand = require('./utils/parseCommand');
+const loadCommands = require('./utils/loadCommands');
+
+const COMMANDS = loadCommands();
 
 class Bot {
   constructor(config) {
@@ -51,7 +54,7 @@ class Bot {
 
       for (let i = 0; i < 30; i++) {
         initArr.push({
-          name: `${i+1}`,
+          name: `${i + 1}`,
           players: [],
         })
       }
@@ -102,8 +105,8 @@ class Bot {
     const [command, args] = parseCommand(this, msg);
 
     // Matches the command to its file in './commands'.
-    if (fs.existsSync(`${__dirname}/commands/${command}.js`)) {
-      require(`./commands/${command}`)(this, args, msg);
+    if (command in COMMANDS) {
+      COMMANDS[command](this, args, msg);
     }
   }
 

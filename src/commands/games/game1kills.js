@@ -1,11 +1,11 @@
-const hasPermission = require('../utils/hasPermission');
-const errorMsg = require('../utils/errorMsg.js');
-const successMsg = require('../utils/successMsg.js');
-const logEvent = require('../utils/logEvent');
-const calculatePoints = require('../utils/calculatePoints');
+const hasPermission = require('../../utils/hasPermission');
+const errorMsg = require('../../utils/errorMsg.js');
+const successMsg = require('../../utils/successMsg.js');
+const logEvent = require('../../utils/logEvent');
+const calculatePoints = require('../../utils/calculatePoints');
 
-const saveResources = require('../database/saveResources');
-const updateTeams = require('../functions/updateTeams');
+const saveResources = require('../../database/saveResources');
+const updateTeams = require('../../functions/updateTeams');
 
 module.exports = async function (bot, args, msg) {
   if (!hasPermission(bot, msg)) {
@@ -34,14 +34,14 @@ module.exports = async function (bot, args, msg) {
 
   for (let i = 0; i < 30; i++) {
     if (slots[i]) {
-      bot.resources.teams[i].game2kills = slots[i];
+      bot.resources.teams[i].game1kills = slots[i];
     } else {
-      bot.resources.teams[i].game2kills = 0;
+      bot.resources.teams[i].game1kills = 0;
     }
   }
 
-  bot.game2kills = true;
+  bot.game1kills = true;
   calculatePoints(bot);
-  successMsg(msg, 'Game 2 kills recorded.');
+  successMsg(msg, 'Game 1 kills recorded.');
   bot.updateTeams(bot);
 }
