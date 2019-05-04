@@ -39,8 +39,8 @@ module.exports = async function (bot, args, msg) {
   const url = newSlot <= 15 ? bot.team_panel_1.url : bot.team_panel_2.url;
 
   arraymove(bot.resources.teams, curSlot-1, newSlot-1);
-  successMsg(msg, `Team ${bot.resources.teams[newSlot-1].name} successfully moved to [Slot ${newSlot}](${url}).`);
-  logEvent(bot, `Team ${bot.resources.teams[newSlot-1].name} has been moved to [Slot ${newSlot}](${url}).`);
+  successMsg(msg, `${bot.resources.teams[newSlot-1].name} successfully moved to [Slot ${newSlot}](${url}).`);
+  logEvent(bot, `${bot.resources.teams[newSlot-1].name} has been moved to [Slot ${newSlot}](${url}).`);
   saveResources(bot);
   updateTeams(bot);
 }

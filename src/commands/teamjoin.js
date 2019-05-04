@@ -47,19 +47,19 @@ module.exports = async function (bot, args, msg) {
   const team = teams[slotNum-1];
 
   if (team.players.length >= 4) {
-    return errorMsg(msg, `Team ${team.name} is already full.`);
+    return errorMsg(msg, `${team.name} is already full.`);
   }
 
   const author = msg.author;
 
   const embed = new RichEmbed();
   embed.setColor(0x36393E);
-  embed.setDescription(`${author} has requested to join Slot ${slotNum} (Team ${team.name}).`);
+  embed.setDescription(`${author} has requested to join Slot ${slotNum} (${team.name}).`);
 
   
   const requestMsg = await requestsChannel.send(embed);
-  successMsg(msg, `Request to join Slot ${slotNum} (Team ${team.name}) [successfully made](${requestMsg.url}).`);
-  logEvent(bot, `${author} made a request to join Slot ${slotNum} (Team ${team.name}).`);
+  successMsg(msg, `Request to join Slot ${slotNum} (${team.name}) [successfully made](${requestMsg.url}).`);
+  logEvent(bot, `${author} made a request to join Slot ${slotNum} (${team.name}).`);
 
   bot.resources.requests[user_id] = {
     created_at: new Date(),

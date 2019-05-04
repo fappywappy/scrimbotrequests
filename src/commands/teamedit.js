@@ -26,8 +26,8 @@ module.exports = async function (bot, args, msg) {
 
   const oldName = bot.resources.teams[curSlot-1].name;
   bot.resources.teams[curSlot-1].name = newName;
-  successMsg(msg, `Team ${oldName} has been successfully renamed as [Team ${newName}](${url}).`);
-  logEvent(bot, `Team ${oldName} has been renamed as [Team ${newName}](${url}).`);
+  successMsg(msg, `${oldName} has been successfully renamed as [${newName}](${url}).`);
+  logEvent(bot, `${oldName} has been renamed as [${newName}](${url}).`);
   saveResources(bot);
   updateTeams(bot);
 }
