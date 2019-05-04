@@ -7,7 +7,7 @@ module.exports = async function (bot, rxn, user) {
   if (user.bot) return;
   if (rxn.message.channel.id !== bot.requestsChannel.id) return;
 
-  const member = await bot.guild.fetchMember(user.id);
+  const member = await bot.guild.fetchMember(userID);
   const memberRoles = member.roles;
 
   const { ALLOWED_ROLES, INTEAM_ROLE } = bot.config;
@@ -41,11 +41,13 @@ module.exports = async function (bot, rxn, user) {
     const slotNum = request.slot_number;
     const url = slotNum <= 15 ? bot.team_panel_1.url : bot.team_panel_2.url;
 
+    const targetMember = await bot.guild.fetchMember(userID);
+
     bot.resources.teams[slotNum - 1].players.push(userID);
     updateTeams(bot);
     sendDM(bot, userID, `Your request to join [Slot ${slotNum}](${url}) has been approved.`);
     logEvent(bot, `<@${userID}>'s request to join [Slot ${slotNum}](${url}) has been approved.`);
-    member.addRole(INTEAM_ROLE);
+    targetMember.addRole(INTEAM_ROLE);
   } else if (rxn.emoji.name === '❌') {
     // Allow request maker to delete their own request by pressing X.
     for (let user_id in requests) {
