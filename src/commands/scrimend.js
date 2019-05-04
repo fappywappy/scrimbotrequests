@@ -39,14 +39,14 @@ module.exports = async function (bot, args, msg) {
     congratsStr += `These ${winningTeams.length} teams have secured a spot in the next scrim:\n`
 
     for (let i = 0; i < winningTeams.length; i++) {
-      congratsStr += `• Team ${winningTeams[i].name}`
+      congratsStr += `• ${winningTeams[i].name}`
       if (i !== winningTeams.length - 1) congratsStr += '\n'
     }
   } else {
     congratsStr += `These ${winningTeams.length} teams have secured a spot in the next scrim:\n`
 
     for (let i = 0; i < 5; i++) {
-      congratsStr += `• Team ${winningTeams[i].name}`
+      congratsStr += `• ${winningTeams[i].name}`
       if (i !== winningTeams.length - 1) congratsStr += '\n'
     }
   }

@@ -85,6 +85,8 @@ class Bot {
     await initTeams(this);
     await updateTeams(this);
 
+    setInterval(updateTeams, 30000, this);
+
     // Check requests to see if any of them got deleted.
     await checkRequests(this);
   }

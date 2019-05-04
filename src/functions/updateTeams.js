@@ -32,6 +32,8 @@ module.exports = async function (bot) {
     authorText += ' | TEAMS UNLOCKED'
   }
 
+  authorText += ` | ${teams.reduce((sum, team) => sum + team.players.length, 0)}/120 PLAYERS`
+
   embed.setAuthor(authorText)
   embed.setColor(color);
   
