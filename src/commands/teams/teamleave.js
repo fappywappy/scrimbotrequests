@@ -23,6 +23,7 @@ module.exports = async function (bot, args, msg) {
           found = true;
           return false;
         };
+        return true;
       })
     }
   }
