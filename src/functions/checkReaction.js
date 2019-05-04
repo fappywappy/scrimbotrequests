@@ -7,7 +7,7 @@ module.exports = async function (bot, rxn, user) {
   if (user.bot) return;
   if (rxn.message.channel.id !== bot.requestsChannel.id) return;
 
-  const member = await bot.guild.fetchMember(userID);
+  const member = await bot.guild.fetchMember(user.id);
   const memberRoles = member.roles;
 
   const { ALLOWED_ROLES, INTEAM_ROLE } = bot.config;
