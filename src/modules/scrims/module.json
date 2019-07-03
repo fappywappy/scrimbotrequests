@@ -1,0 +1,14 @@
+{
+  "active": false,
+  "name": "Scrim Module",
+  "author": "DisModular",
+  "version": "1.0.0",
+  "description": "A general scrim bot created for killer.",
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "discord.js": "^11.4.2",
+    "dotenv": "^7.0.0",
+    "mongoose": "^5.5.4",
+    "strip-indent": "^2.0.0"
+  }
+}

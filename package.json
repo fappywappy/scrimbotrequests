@@ -1,13 +1,11 @@
 {
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
-    "start": "node src/index.js",
-    "inspect": "node --inspect src/index.js"
+    "build": "webpack --mode production",
+    "start": "babel-node -r node_modules/dotenv/config scripts/start.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "DisModular",
   "dependencies": {
     "dateformat": "^3.0.3",
     "discord.js": "^11.4.2",
@@ -15,7 +13,13 @@
     "mongoose": "^5.5.4",
     "strip-indent": "^2.0.0"
   },
-  "engines": {
-    "node": "11.13.0"
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
   }
 }
