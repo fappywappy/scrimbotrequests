@@ -1,5 +1,4 @@
 const stripIndent = require('strip-indent');
-const { RichEmbed } = require('discord.js');
 
 export default function (bot, module, args, cmdMsg) {
   const { prefix } = bot.config;

@@ -1,14 +1,14 @@
 {
-  "version": "1.0.0",
-  "main": "bot.js",
+  "name": "DisModular",
+  "private": true,
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "babel-node -r node_modules/dotenv/config scripts/start.js"
+    "start": "babel-node -r node_modules/dotenv/config scripts/start.js",
+    "test": "node scripts/test.js"
   },
-  "author": "DisModular",
   "dependencies": {
     "dateformat": "^3.0.3",
-    "discord.js": "^11.4.2",
+    "discord.js": "^11.5.1",
+    "dismodular": "file:dismodular",
     "dotenv": "^7.0.0",
     "mongoose": "^5.5.4",
     "strip-indent": "^2.0.0"
@@ -18,8 +18,6 @@
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
-    "babel-loader": "^8.0.6",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2"
+    "babel-loader": "^8.0.6"
   }
 }

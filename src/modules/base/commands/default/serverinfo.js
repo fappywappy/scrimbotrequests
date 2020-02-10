@@ -4,8 +4,6 @@ const dateFormat = require('dateformat');
 
 export default function (bot, module, args, msg) {
   const channel = msg.channel;
-  // const { INFO } = bot.config.ICONS;
-  console.log(bot);
   const guild = bot.guilds.get(bot.config.guild);
 
   const embed = new RichEmbed();

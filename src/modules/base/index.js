@@ -1,4 +1,4 @@
-import Module from '../../structures/Module';
+import { Module } from 'dismodular';
 
 export default class Base extends Module {
   constructor(bot) {
