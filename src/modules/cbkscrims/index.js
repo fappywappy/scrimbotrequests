@@ -1,40 +1,28 @@
 import { Module } from 'dismodular';
+import { initializeTeams, updateTeams, checkRequests, setMemberVariables } from './functions';
+import moduleSettings from './settings/moduleSettings';
 
-export default class CBKScrims extends Module {
+const userSettings = (process.env.NODE_ENV === 'development') ? 
+  require('./settings/userSettings.dev').default : 
+  require('./settings/userSettings').default;
+
+export default class CBKScrims extends Module {  
   constructor(bot) {
     super(bot, __dirname);
-    if (!this.settings.active) return;
-    this.initTeams = require('./functions/initTeams').bind(null, bot);
-    this.updateTeams = require('./functions/updateTeams').bind(null, bot);
-    this.checkRequests = require('./functions/checkRequests').bind(null, bot);
+    this.moduleSettings = moduleSettings;
+    this.userSettings = userSettings;
+    
+    if (!this.userSettings.enabled) return;
 
-    this.calculatePoints = require('./functions/calculatePoints').bind(null, bot);
-    this.clearRequests = require('./functions/clearRequests').bind(null, bot);
-    this.logEvent = require('./functions/logEvent').bind(null, bot);
-    this.orderByPoints = require('./functions/orderByPoints').bind(null, bot);
-    this.updateTeams = require('./functions/updateTeams').bind(null, bot);
-
-    this.isLocked = false;
-    this.inScrim = false;
-    this.game1positions = false;
-    this.game2positions = false;
-    this.game3positions = false;
-    this.game1kills = false;
-    this.game2kills = false;
-    this.game3kills = false;
-    this.resultsRecorded = false;
-
-    this._init();
+    this._initialize();
   }
 
-  async _init() {
-    // Initiate and update the team panels.
-    await this.initTeams();
-    await this.updateTeams();
-
+  async _initialize() {
+    await setMemberVariables(this);
+    await initializeTeams(this);
+    await updateTeams(this);
+    
+    setInterval(checkRequests, 15000, this);
     setInterval(updateTeams, 30000, this);
-
-    // Check requests to see if any of them got deleted.
-    this.checkRequests();
   }
 }

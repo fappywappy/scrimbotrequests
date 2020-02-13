@@ -1,0 +1,11 @@
+{
+  "author": "DisModular",
+  "deprecated": false,
+  "description": "A framework for DisModular bots.",
+  "main": "./src/index",
+  "name": "dismodular",
+  "version": "1.0.0",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  }
+}

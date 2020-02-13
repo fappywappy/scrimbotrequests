@@ -1,0 +1,16 @@
+A user connects to the web portal. They send a request to the server. 
+The server finds the user's specific bot configuration.
+It sends a message to create a new instance.
+It tells it to download the base repo of the bot.
+It then uploads a list of settings to the base.
+The server then tells the base to download all the packages. It can find the git repos by looking up our API.
+It then runs the bot.
+
+Change the bot so it doesn't use global namespace, but namespace allocated for each bot.
+
+Inherited settings. Default settings.
+
+Don't create syntax variables unless the variable is not intuitive.
+Variable names should be fully spelled out and not abbreviated so that it's quicker to read.
+Ability to dynamically enable or disable modules.
+Pull module information from package.json.

@@ -1,16 +1,12 @@
-import { Command } from 'dismodular';
+import { hasPermission, parseCommand } from '../functions';
 
-export default function message(bot, module, msg) {
-  // Returns if the sender is a bot, message is not from a text channel,
-  // or if sender has insufficient permissions.
+export default function message(mod, msg) {
   if (msg.author.bot) return;
-  if (!Command.isCommand(bot, msg)) return;
+  if (!hasPermission(mod, msg.author));
+  const [command, args] = parseCommand(bot, msg);
+  if (!command) return;
 
-  // Separate the message content into commands and arguments.
-  const [command, args] = Command.parseCommand(bot, msg);
-
-  // Matches the command to its file in './commands'.
-  if (command in module.commands) {
-    module.commands[command](args, msg);
+  if (command in mod.commands) {
+    mod.commands[command](args, msg);
   }
 }

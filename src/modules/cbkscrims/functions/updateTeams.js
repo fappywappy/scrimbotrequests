@@ -1,32 +1,32 @@
-const { RichEmbed } = require('discord.js');
+import { RichEmbed } from 'discord.js';
 
-module.exports = async function (bot) {
-  const { teams } = bot.resources;
+export default function updateTeams(botModule) {
+  const { teams } = mod.resources;
 
   const embed = new RichEmbed();
-  let authorText = bot.inScrim ? '' : 'SCRIM INACTIVE';
-  const color = bot.inScrim ? 0x77dd77 : 0x36393E;
+  let authorText = mod.inScrim ? '' : 'SCRIM INACTIVE';
+  const color = mod.inScrim ? 0x77dd77 : 0x36393E;
 
-  if (bot.inScrim) {
-    if (!bot.game1positions) {
+  if (mod.inScrim) {
+    if (!mod.game1positions) {
       authorText += 'WAITING FOR GAME 1 PLACEMENT RESULTS'
-    } else if (!bot.game1kills) {
+    } else if (!mod.game1kills) {
       authorText += 'WAITING FOR GAME 1 KILL RESULTS'
-    } else if (!bot.game2positions) {
+    } else if (!mod.game2positions) {
       authorText += 'WAITING FOR GAME 2 PLACEMENT RESULTS'
-    } else if (!bot.game2kills) {
+    } else if (!mod.game2kills) {
       authorText += 'WAITING FOR GAME 2 KILL RESULTS'
-    } else if (!bot.game3positions) {
+    } else if (!mod.game3positions) {
       authorText += 'WAITING FOR GAME 3 PLACEMENT RESULTS'
-    } else if (!bot.game3kills) {
+    } else if (!mod.game3kills) {
       authorText += 'WAITING FOR GAME 3 KILL RESULTS'
     } else {
-      bot.resultsRecorded = true;
+      mod.resultsRecorded = true;
       authorText += 'SCRIM RESULTS RECORDED - WAITING FOR STAFF'
     }
   }
 
-  if (bot.isLocked) {
+  if (mod.isLocked) {
     authorText += ' | TEAMS LOCKED'
   } else {
     authorText += ' | TEAMS UNLOCKED'
@@ -58,8 +58,8 @@ module.exports = async function (bot) {
     }
   }
 
-  const { COMMAND_PREFIX } = bot.config;
-  bot.team_panel_1.edit(embed);
+  const { COMMAND_PREFIX } = mod.config;
+  mod.team_panel_1.edit(embed);
 
   // Embed fields for team panel 2 (#16 - #30).
   for (let i = 0; i < 15; i++) {
@@ -82,5 +82,5 @@ module.exports = async function (bot) {
     }
   }
   
-  bot.team_panel_2.edit(embed);
+  mod.team_panel_2.edit(embed);
 }

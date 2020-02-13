@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "enabled": true,
   "name": "Base Module",
   "author": "DisModular",
   "version": "1.0.0",

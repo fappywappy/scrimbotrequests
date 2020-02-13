@@ -1,15 +1,7 @@
-import checkReaction from './functions/checkReaction';
+import updateTeams from '../functions';
 import { sendDM, sendLog } from '../utilities';
-const saveResources = require('../../../database/saveResources');
-const sendDM = require('../../../utils/sendDM');
-const updateTeams = require('../functions/updateTeams');
 
-export default function messageReactionAdd(bot, rxn, user) {
-  // Check reaction logic.
-  checkReaction(bot, rxn, user);
-}
-
-export default async function (bot, rxn, user) {
+export default async function onMessageReactionAdd(botModule, reaction, user) {
   if (user.bot) return;
   if (rxn.message.channel.id !== bot.requestsChannel.id) return;
 

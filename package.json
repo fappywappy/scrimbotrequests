@@ -1,14 +1,13 @@
 {
-  "name": "DisModular",
+  "name": "CBK Scrimbot Bot Instance",
   "private": true,
   "scripts": {
     "start": "babel-node -r node_modules/dotenv/config scripts/start.js",
-    "test": "node scripts/test.js"
   },
   "dependencies": {
     "dateformat": "^3.0.3",
     "discord.js": "^11.5.1",
-    "dismodular": "file:dismodular",
+    "dismodular": "./local_modules/dismodular",
     "dotenv": "^7.0.0",
     "mongoose": "^5.5.4",
     "strip-indent": "^2.0.0"
@@ -17,7 +16,6 @@
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-loader": "^8.0.6"
+    "@babel/preset-env": "^7.4.5"
   }
 }

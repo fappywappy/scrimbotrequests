@@ -5,9 +5,7 @@ export default function messageDelete(bot, msg) {
   checkDelete(bot, msg);
 }
 
-const saveResources = require('../../database/saveResources');
-const sendDM = require('../../../utils/sendDM');
-const logEvent = require('../functions/logEvent');
+import { sendDM, sendLog } from '../utilities';
 
 export default async function (bot, msg) {
   if (msg.channel.id !== bot.requestsChannel.id) return;

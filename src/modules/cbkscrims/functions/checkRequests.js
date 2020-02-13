@@ -1,24 +1,20 @@
-const saveResources = require('../database/saveResources');
-const sendDM = require('../utils/sendDM');
-const logEvent = require('../utils/logEvent');
+import { sendDM, sendLog } from '../utilities';
 
-module.exports = async function (bot) {
-  setInterval(async () => {
-    const msgs = await bot.requestsChannel.fetchMessages({limit: 99});
+export default async function checkRequests(botmodule) {
+  const msgs = await botmodule.requestsChannel.fetchMessages({ limit: 99 });
 
-    const { requests } = bot.resources;
+  const { requests } = botmodule.resources;
 
-    for (let user_id in requests) {
-      const request = requests[user_id];
-      const msg_id = request.message_id;
+  for (let user_id in requests) {
+    const request = requests[user_id];
+    const msg_id = request.message_id;
 
-      if (!msgs.has(msg_id)) {
-        delete bot.resources.requests[user_id];
-        saveResources(bot);
+    if (!msgs.has(msg_id)) {
+      delete botmodule.resources.requests[user_id];
+      saveResources(botmodule);
 
-        sendDM(bot, user_id, 'It seems your request has been deleted.')
-        logEvent(bot, `<@${user_id}>'s request has been deleted.`);
-      }
+      sendDM(botmodule, user_id, 'It seems your request has been deleted.')
+      sendLog(botmodule, `<@${user_id}>'s request has been deleted.`);
     }
-  }, 15000)
+  }
 }
